@@ -5,17 +5,17 @@ const ErrorResponse = require("../utils/errorResponse");
 
 // @desc Get products
 // @route GET /api/v1/products
-// @route GET /api/v1/shops/:shopId/products
+// @route GET /api/v1/stores/:storeId/products
 // @access Public
 
 exports.getProducts = asyncHandler(async (req, res, next) =>{
     let query;
 
-    if(req.params.shopId){
-        query = Product.find({shop: req.params.shopId});
+    if(req.params.storeId){
+        query = Product.find({store: req.params.storeId});
     } else {
         query = Product.find().populate({
-            path: 'shop',
+            path: 'store',
             select: 'name description'
             
         });

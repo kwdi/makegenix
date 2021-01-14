@@ -4,41 +4,41 @@
     "description": "Casio G-shock 5600",
     "price" : 600,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b34"
+    "store": "600053872c521099df4f2b34"
   },
   {
     "title": "Seiko watch",
     "description": "Seiko skx007",
     "price" : 1300,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b34"
+    "store": "600053872c521099df4f2b34"
   },
   {
     "title": "Smiths watch",
     "description": "Everest Prs-25",
     "price" : 4500,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b34"
+    "store": "600053872c521099df4f2b34"
   },
   {
     "title": "Guitar",
     "description": "Electric guitar",
     "price" : 700,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b35"
+    "store": "600053872c521099df4f2b35"
   },
   {
     "title": "Korn - Best of",
     "description": "CD album",
     "price" : 200,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b35"
+    "store": "600053872c521099df4f2b35"
   },
   {
     "title": "Ursa",
     "description": "Dota skin",
     "price" : 30,
     "freeshipping" : true,
-    "shop": "600053872c521099df4f2b37"
+    "store": "600053872c521099df4f2b37"
   }
 ]

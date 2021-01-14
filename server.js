@@ -12,7 +12,7 @@ dotenv.config({path: './config/config.env'});
 connectDB();
 
 // Router
-const shops = require('./routes/shops');
+const stores = require('./routes/stores');
 const products = require('./routes/products');
 
 
@@ -28,7 +28,7 @@ if(process.env.NODE_ENV === 'development'){
 
 
 // Mouter routers
-app.use('/api/v1/shops', shops);
+app.use('/api/v1/stores', stores);
 app.use('/api/v1/products', products);
 
 app.use(errorHandler);

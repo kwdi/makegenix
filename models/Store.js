@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 
 
-const ShopSchema = new mongoose.Schema({
+const StoreSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please add a name'],
@@ -63,25 +63,25 @@ const ShopSchema = new mongoose.Schema({
   toObject: {virtuals: true}
 });
 
-// Create shop slug from name
+// Create store slug from name
 
-ShopSchema.pre('save', function() {
+StoreSchema.pre('save', function() {
   this.slug = slugify(this.name, {lower: true});
 })
 
-// Cascade delete Products when a Shop is deleted
-ShopSchema.pre('remove', async function (next) {
-  await this.model('Product').deleteMany({ shop: this._id});
+// Cascade delete Products when a Store is deleted
+StoreSchema.pre('remove', async function (next) {
+  await this.model('Product').deleteMany({ store: this._id});
   next();
 })
 
 // Reverse populate with virtuals
-ShopSchema.virtual('products', {
+StoreSchema.virtual('products', {
   ref: 'Product',
   localField: '_id',
-  foreignField: 'shop',
+  foreignField: 'store',
   justOne: false
 });
 
 
-module.exports = mongoose.model('Shop', ShopSchema);
+module.exports = mongoose.model('Store', StoreSchema);

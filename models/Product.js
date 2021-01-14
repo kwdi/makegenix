@@ -22,9 +22,9 @@ const ProductSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    shop: {
+    store: {
          type: mongoose.Schema.ObjectId,
-         ref: 'Shop',
+         ref: 'Store',
          required: true
      }
 });
