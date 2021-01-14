@@ -4,7 +4,8 @@ const {
     getStore, 
     createStore, 
     updateStore, 
-    deleteStore 
+    deleteStore,
+    storePhotoUpload
 } = require('../controllers/stores');
 
 // Include other resource routers
@@ -16,6 +17,7 @@ const router = express.Router();
 // Re-route into other resource routers
 router.use('/:storeId/products', productRouter)
 
+router.route('/:id/photo').put(storePhotoUpload);
 
 router
     .route('/')
