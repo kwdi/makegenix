@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Kostas stash",
+    "description": "Kostas is selling his stuff online",
+    "website": "https://kostas.com",
+    "phone": "111-1111",
+    "email": "kostas@gmail.com",
+    "country": "Sweden",
+    "products": ["Electronics", "Toys"]   
+  },
+  {
+    "name": "Gus secret shop",
+    "description": "Gus creates, you buy",
+    "website": "https://gus.com",
+    "phone": "222-2222",
+    "email": "gus@gmail.com",
+    "country": "Norway",
+    "products": ["Fashion", "Toys"]   
+  },
+  {
+    "name": "Leas and friends",
+    "description": "Here is all the things i love",
+    "website": "https://leas.com",
+    "phone": "333-3333",
+    "email": "leas@gmail.com",
+    "country": "Greece",
+    "products": ["Other", "Home and Garden"]   
+  },
+  {
+    "name": "Cri",
+    "description": "Dota items",
+    "website": "https://cri.com",
+    "phone": "444-4444",
+    "email": "cri@gmail.com",
+    "country": "Greece",
+    "products": ["Electronics", "Sports"] 
+  }
+]
