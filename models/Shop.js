@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
+
 
 const ShopSchema = new mongoose.Schema({
     name: {
@@ -27,26 +29,9 @@ const ShopSchema = new mongoose.Schema({
           'Please add a valid email'
         ]
       },
-      address: {
+      country: {
         type: String,
-        required: [true, 'Please add an address']
-      },
-      location: {
-        // GeoJSON Point
-        type: {
-          type: String,
-          enum: ['Point']
-        },
-        coordinates: {
-          type: [Number],
-          index: '2dsphere'
-        },
-        formattedAddress: String,
-        street: String,
-        city: String,
-        state: String,
-        zipcode: String,
-        country: String
+        required: [true, 'Please add a country']
       },
       products: {
         // Array of strings
@@ -71,5 +56,10 @@ const ShopSchema = new mongoose.Schema({
       }
 });
 
+// Create shop slug from name
+
+ShopSchema.pre('save', function() {
+  this.slug = slugify(this.name, {lower: true});
+})
 
 module.exports = mongoose.model('Shop', ShopSchema);
