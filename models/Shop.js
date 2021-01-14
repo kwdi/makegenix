@@ -11,6 +11,10 @@ const ShopSchema = new mongoose.Schema({
         maxlength: [50, 'Name can not be more than 50 characters']
     },
     slug: String,
+    description: {
+      type: String,
+      required: [true, 'Please add a description']
+    },
     website: {
         type: String,
         match: [
@@ -33,7 +37,7 @@ const ShopSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add a country']
       },
-      products: {
+      typeofProducts: {
         // Array of strings
         type: [String],
         required: true,
@@ -54,6 +58,9 @@ const ShopSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
       }
+},{
+  toJSON: {virtuals: true},
+  toObject: {virtuals: true}
 });
 
 // Create shop slug from name
@@ -61,5 +68,20 @@ const ShopSchema = new mongoose.Schema({
 ShopSchema.pre('save', function() {
   this.slug = slugify(this.name, {lower: true});
 })
+
+// Cascade delete Products when a Shop is deleted
+ShopSchema.pre('remove', async function (next) {
+  await this.model('Product').deleteMany({ shop: this._id});
+  next();
+})
+
+// Reverse populate with virtuals
+ShopSchema.virtual('products', {
+  ref: 'Product',
+  localField: '_id',
+  foreignField: 'shop',
+  justOne: false
+});
+
 
 module.exports = mongoose.model('Shop', ShopSchema);

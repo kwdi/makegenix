@@ -7,7 +7,15 @@ const {
     deleteShop 
 } = require('../controllers/shops');
 
+// Include other resource routers
+const productRouter = require('./products');
+
 const router = express.Router();
+
+
+// Re-route into other resource routers
+router.use('/:shopId/products', productRouter)
+
 
 router
     .route('/')

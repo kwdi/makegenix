@@ -1,21 +1,21 @@
 [
-  {
+  { "_id": "600053872c521099df4f2b34",
     "name": "Kostas stash",
     "description": "Kostas is selling his stuff online",
     "website": "https://kostas.com",
     "phone": "111-1111",
     "email": "kostas@gmail.com",
     "country": "Sweden",
-    "products": ["Electronics", "Toys"]   
+    "typeofProducts": ["Electronics", "Toys"]   
   },
-  {
+  { "_id": "600053872c521099df4f2b35",
     "name": "Gus secret shop",
     "description": "Gus creates, you buy",
     "website": "https://gus.com",
     "phone": "222-2222",
     "email": "gus@gmail.com",
     "country": "Norway",
-    "products": ["Fashion", "Toys"]   
+    "typeofProducts": ["Fashion", "Toys"]   
   },
   {
     "name": "Leas and friends",
@@ -24,15 +24,15 @@
     "phone": "333-3333",
     "email": "leas@gmail.com",
     "country": "Greece",
-    "products": ["Other", "Home and Garden"]   
+    "typeofProducts": ["Other", "Home and Garden"]   
   },
-  {
+  { "_id": "600053872c521099df4f2b37",
     "name": "Cri",
     "description": "Dota items",
     "website": "https://cri.com",
     "phone": "444-4444",
     "email": "cri@gmail.com",
     "country": "Greece",
-    "products": ["Electronics", "Sports"] 
+    "typeofProducts": ["Electronics", "Sports"] 
   }
 ]

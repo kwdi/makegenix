@@ -8,7 +8,7 @@ dotenv.config({ path: './config/config.env' });
 
 // Load models
 const Shop = require('./models/Shop');
-
+const Product = require('./models/Product');
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -24,11 +24,17 @@ const shops = JSON.parse(
   
 );
 
+const products = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/products.json`, 'utf-8')
+  
+);
+
 
 // Import into DB
 const importData = async () => {
   try {
     await Shop.create(shops);
+    await Product.create(products);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
@@ -40,6 +46,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Shop.deleteMany();
+    await Product.deleteMany();
     console.log('Data Destroyed...'.red.inverse);
     process.exit();
   } catch (err) {

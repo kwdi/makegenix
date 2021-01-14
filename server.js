@@ -13,7 +13,7 @@ connectDB();
 
 // Router
 const shops = require('./routes/shops');
-
+const products = require('./routes/products');
 
 
 const app = express();
@@ -29,6 +29,7 @@ if(process.env.NODE_ENV === 'development'){
 
 // Mouter routers
 app.use('/api/v1/shops', shops);
+app.use('/api/v1/products', products);
 
 app.use(errorHandler);
 
