@@ -61,7 +61,8 @@ const StoreSchema = new mongoose.Schema({
 },{
   toJSON: {virtuals: true},
   toObject: {virtuals: true}
-});
+}
+);
 
 // Create store slug from name
 
