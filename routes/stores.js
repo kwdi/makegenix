@@ -8,10 +8,15 @@ const {
     storePhotoUpload
 } = require('../controllers/stores');
 
+const Store = require('../models/Store');
+const advancedResults = require('../middleware/advancedResults');
+
+
 // Include other resource routers
 const productRouter = require('./products');
 
 const router = express.Router();
+
 
 
 // Re-route into other resource routers
@@ -21,7 +26,7 @@ router.route('/:id/photo').put(storePhotoUpload);
 
 router
     .route('/')
-    .get(getStores)
+    .get(advancedResults(Store, 'products'), getStores)
     .post(createStore);
 
 router

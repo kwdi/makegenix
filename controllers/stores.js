@@ -3,14 +3,14 @@ const Store = require('../models/Store');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require("../utils/errorResponse");
 
-
+1
 // @desc Get all stores
 // @route GET /api/v1/stores
 // @access Public
 exports.getStores = asyncHandler ( async (req, res, next ) => {
-   
-    const stores = await Store.find();
-    res.status(200).json({success: true, count: stores.length , data: stores});
+    
+    res.status(200).json(res.advancedResults);
+
    
 });
 
@@ -102,7 +102,7 @@ exports.storePhotoUpload = asyncHandler ( async (req, res, next ) => {
     
     // Check filesize
     if(file.size > process.env.MAX_FILE_UPLOAD){
-        return next(new ErrorResponse(`Please upload an image file less thatn ${process.env.MAX_FILE_UPLOAD}`, 400));
+        return next(new ErrorResponse(`Please upload an image file less than ${process.env.MAX_FILE_UPLOAD}`, 400));
     }
 
     // Create custom filename
