@@ -3,7 +3,7 @@ const Store = require('../models/Store');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require("../utils/errorResponse");
 
-1
+
 // @desc Get all stores
 // @route GET /api/v1/stores
 // @access Public
