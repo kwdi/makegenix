@@ -49,15 +49,24 @@ exports.getProduct = asyncHandler(async (req, res, next) =>{
 exports.addProduct = asyncHandler(async (req, res, next) =>{
     
     req.body.store = req.params.storeId;
+    req.body.user = req.user.id;
 
     const store = await Store.findById(req.params.storeId);
 
     if(!store){
         return next(new ErrorResponse(`Product not found with id of ${req.params.storeid}`, 404))
     }
+
+     // Make sure user is store owner
+     if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.user.id} is not authorized to add a product to store ${store._id}`, 401)
+        );
+    }
+ 
       
     const product = await Product.create(req.body);
-
+ 
 
     res.status(200).json({ success: true, data: product})
 })
@@ -73,6 +82,13 @@ exports.updateProduct = asyncHandler(async (req, res, next) =>{
 
     if(!product){
         return next(new ErrorResponse(`Product not found with id of ${req.params.id}`, 404))
+    }
+
+    // Make sure user is product owner
+    if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.user.id} is not authorized to update a product to store ${product._id}`, 401)
+        );
     }
       
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -96,7 +112,14 @@ exports.deleteProduct = asyncHandler(async (req, res, next) =>{
     if(!product){
         return next(new ErrorResponse(`Product not found with id of ${req.params.id}`, 404))
     }
-      
+    
+    // Make sure user is store owner
+    if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.user.id} is not authorized to delete ${product._id}`, 401)
+        );
+    }
+
     await product.remove();
 
     res.status(200).json({ success: true, data: {}})

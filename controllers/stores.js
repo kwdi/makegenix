@@ -32,7 +32,18 @@ exports.getStore = asyncHandler ( async (req, res, next ) => {
 // @route POST /api/v1/stores/:id
 // @access Private
 exports.createStore = asyncHandler ( async (req, res, next ) => {
-   
+    
+    // Add user to req.body
+    req.body.user = req.user.id;
+
+    // Check for published store
+    const publishedStore = await Store.findOne({ user: req.user.id});
+
+    //If the user is not an admin, they can only add one store
+    if(publishedStore && req.user.role !== 'admin'){
+        return next (new ErrorResponse(`The user with ID ${req.user.id} has already publised a Store`, 400));
+    }
+
     const store = await Store.create(req.body);
     
     res.status(201).json({
@@ -47,14 +58,24 @@ exports.createStore = asyncHandler ( async (req, res, next ) => {
 // @access Private
 exports.updateStore = asyncHandler ( async (req, res, next ) => {
 
-    const store = await Store.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true
-    })
+    let store = await Store.findById(req.params.id);
 
     if(!store){
         return  res.status(400).json({success: false})
      }
+
+    // Make sure user is store owner
+    if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.params.id} is not authorized to update this store`, 401)
+        );
+    }
+
+    store = await Store.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    });
+
 
     res.status(200).json({success: true, data: store });
 
@@ -73,6 +94,13 @@ exports.deleteStore = asyncHandler ( async (req, res, next ) => {
 
     store.remove();
 
+     // Make sure user is store owner
+     if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.params.id} is not authorized to delete this store`, 401)
+        );
+    }
+
     res.status(200).json({success: true, data: {} });
 });
 
@@ -88,7 +116,14 @@ exports.storePhotoUpload = asyncHandler ( async (req, res, next ) => {
         return  res.status(400).json({success: false})
      }
 
-    store.remove();
+    // Make sure user is store owner
+    if(store.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(
+            new ErrorResponse(`User ${req.params.id} is not authorized to update this store`, 401)
+        );
+    }
+ 
+
 
     if(!req.files) {
         return next(new ErrorResponse(`Please upload a file`, 400));

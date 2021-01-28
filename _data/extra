@@ -1,0 +1,27 @@
+  {
+    "name": "Leas and friends",
+    "description": "Here is all the things i love",
+    "website": "https://leas.com",
+    "phone": "333-3333",
+    "email": "leas@gmail.com",
+    "country": "Greece",
+    "typeofProducts": ["Other", "Home and Garden"]   
+  },
+  { "_id": "600053872c521099df4f2b37",
+    "name": "Cri",
+    "description": "Dota items",
+    "website": "https://cri.com",
+    "phone": "444-4444",
+    "email": "cri@gmail.com",
+    "country": "Greece",
+    "typeofProducts": ["Electronics", "Sports"] 
+  }
+
+  ,
+  {
+    "title": "Ursa",
+    "description": "Dota skin",
+    "price" : 30,
+    "freeshipping" : true,
+    "store": "600053872c521099df4f2b37"
+  }
